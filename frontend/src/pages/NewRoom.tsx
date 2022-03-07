@@ -16,7 +16,7 @@ export function NewRoom(){
                 <strong>Crie salas de Q&amp;A ao vivo</strong>
                 <p>Tire as duvidas da sua audiencia em tempo real  </p>
                
-                
+                    
             </aside>
 
             <main>
