@@ -2,6 +2,8 @@ import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg'
 import googleImg from '../assets/images/google-icon.svg'
 
+import {ButtonCounter} from '../components/ButtonCounter'
+
 import '../styles/auth.scss'
 
 
@@ -20,7 +22,7 @@ export function Home(){
             <main>
                 <div className='main-content'>
                     <img src={logoImg} alt="imagem de logo letmeask" />
-                    <button className='btn'>
+                    <button className='btn create-roon'>
                         <img src={googleImg} alt="" />
                         Crie sua sala com o google
 
@@ -31,7 +33,9 @@ export function Home(){
                         <input type="text" placeholder='digite o codigo da sala' name="" id="" />
                     </form>
 
-                    <button className='btn'>Entrar na sala</button>
+                    <ButtonCounter type='submit'>
+                        Entrar na sala
+                    </ButtonCounter>
                 </div>
             </main>
 

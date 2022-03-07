@@ -91,9 +91,38 @@
     }
 
 
-    .btn{
-        margin-top: 14px;
+    .create-roon{
+        margin-top: 64px;
         padding: 8px;
+        border-radius: 8px;
+        height: 58px;
+        font-weight: 500;
+        background: #ea4335;
+        color: white;
+
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        cursor: pointer;
+        border: 0;
+
+
+        transition: filter 0.2s;
+
+
+        img{
+            margin-right: 8px;
+        }
+
+        &:hover{
+            filter: brightness(0.9);
+        }
+
+        
+
     }
 
 
