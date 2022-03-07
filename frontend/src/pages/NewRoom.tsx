@@ -7,7 +7,7 @@ import {ButtonCounter} from '../components/ButtonCounter'
 import '../styles/auth.scss'
 
 
-export function Home(){
+export function NewRoom(){
     return(
         <div id='page-auth'>
             <aside>
@@ -22,20 +22,18 @@ export function Home(){
             <main>
                 <div className='main-content'>
                     <img src={logoImg} alt="imagem de logo letmeask" />
-                    <button className='btn create-roon'>
-                        <img src={googleImg} alt="" />
-                        Crie sua sala com o google
-
-                    </button>
-                    <div className='separator'>ou entre em uma sala</div>
+                   
+                    <h2>Criar uma nova sala</h2>
 
                     <form action="">
-                        <input type="text" placeholder='digite o codigo da sala' name="" id="" />
+                        <input type="text" placeholder='Nome da sala' name="" id="" />
 
                         <ButtonCounter type='submit'>
-                            Entrar na sala
-                       </ButtonCounter>
+                            Criar sala
+                        </ButtonCounter>
                     </form>
+
+                    <p>Quer entrar em  uma sala existente? <a href="#">Clique aqui</a></p>
 
                    
                 </div>
