@@ -2,12 +2,23 @@ import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg'
 import googleImg from '../assets/images/google-icon.svg'
 
+import {useNavigate} from 'react-router-dom'
+
 import {ButtonCounter} from '../components/ButtonCounter'
 
 import '../styles/auth.scss'
 
 
 export function Home(){
+
+
+    const navigate = useNavigate();
+
+
+    function navigateToNewRoom(){
+        navigate('/rooms/new')
+    }
+
     return(
         <div id='page-auth'>
             <aside>
@@ -22,7 +33,7 @@ export function Home(){
             <main>
                 <div className='main-content'>
                     <img src={logoImg} alt="imagem de logo letmeask" />
-                    <button className='btn create-roon'>
+                    <button onClick={navigateToNewRoom} className='btn create-roon'>
                         <img src={googleImg} alt="" />
                         Crie sua sala com o google
 

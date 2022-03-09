@@ -4,6 +4,8 @@ import googleImg from '../assets/images/google-icon.svg'
 
 import {ButtonCounter} from '../components/ButtonCounter'
 
+import {Link} from 'react-router-dom'
+
 import '../styles/auth.scss'
 
 
@@ -33,7 +35,7 @@ export function NewRoom(){
                         </ButtonCounter>
                     </form>
 
-                    <p>Quer entrar em  uma sala existente? <a href="#">Clique aqui</a></p>
+                    <p>Quer entrar em  uma sala existente? <Link to='/' >Clique aqui</Link></p>
 
                    
                 </div>

@@ -1,10 +1,12 @@
 import {Button} from './components/Button'
 import {ButtonCounter} from './components/ButtonCounter'
 
+
+
+import {Route, BrowserRouter, Routes} from 'react-router-dom'
+
 import {Home} from './pages/Home'
 import {NewRoom} from './pages/NewRoom'
-
-import {Route} from 'react-router-dom'
 
 function App() {
 
@@ -12,7 +14,16 @@ function App() {
 
   return (
 
-    <NewRoom/>
+    <BrowserRouter>
+
+      <Routes>
+          <Route path='/'  element={<Home/>}  />
+          <Route path='/rooms/new' element={<NewRoom/>} />
+      </Routes>
+
+      
+    
+    </BrowserRouter>
 
    
   );
