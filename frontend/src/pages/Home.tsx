@@ -2,6 +2,9 @@ import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg'
 import googleImg from '../assets/images/google-icon.svg'
 
+
+import {auth, firebase} from '../services/firebase'
+
 import {useNavigate} from 'react-router-dom'
 
 import {ButtonCounter} from '../components/ButtonCounter'
@@ -15,8 +18,17 @@ export function Home(){
     const navigate = useNavigate();
 
 
-    function navigateToNewRoom(){
-        navigate('/rooms/new')
+    function handleCreateRoom(){
+
+        const provider = new firebase.auth.GoogleAuthProvider()
+
+        auth.signInWithPopup(provider).then(result =>{
+            console.log(result)
+            navigate('/rooms/new')
+        })
+
+
+        
     }
 
     return(
@@ -33,7 +45,7 @@ export function Home(){
             <main>
                 <div className='main-content'>
                     <img src={logoImg} alt="imagem de logo letmeask" />
-                    <button onClick={navigateToNewRoom} className='btn create-roon'>
+                    <button onClick={handleCreateRoom} className='btn create-roon'>
                         <img src={googleImg} alt="" />
                         Crie sua sala com o google
 
