@@ -3,6 +3,8 @@ import logoImg from '../assets/images/logo.svg'
 import googleImg from '../assets/images/google-icon.svg'
 
 
+import {useContext} from 'react'
+
 import {auth, firebase} from '../services/firebase'
 
 import {useNavigate} from 'react-router-dom'
@@ -12,20 +14,31 @@ import {ButtonCounter} from '../components/ButtonCounter'
 import '../styles/auth.scss'
 
 
+import {AuthContext} from '../App'
+
+
 export function Home(){
 
 
     const navigate = useNavigate();
 
+    const {user, signInWithGoogle} = useContext(AuthContext)
 
-    function handleCreateRoom(){
 
-        const provider = new firebase.auth.GoogleAuthProvider()
+   
 
-        auth.signInWithPopup(provider).then(result =>{
-            console.log(result)
-            navigate('/rooms/new')
-        })
+    
+
+
+    async function handleCreateRoom(){
+
+        if(!user){
+           await signInWithGoogle()
+        }
+
+        
+        navigate('/rooms/new')
+        
 
 
         
@@ -43,6 +56,7 @@ export function Home(){
             </aside>
 
             <main>
+               
                 <div className='main-content'>
                     <img src={logoImg} alt="imagem de logo letmeask" />
                     <button onClick={handleCreateRoom} className='btn create-roon'>
@@ -50,10 +64,10 @@ export function Home(){
                         Crie sua sala com o google
 
                     </button>
-                    <div className='separator'>ou entre em uma sala</div>
+                    <div className='separator'>Ou entre em uma sala</div>
 
                     <form action="">
-                        <input type="text" placeholder='digite o codigo da sala' name="" id="" />
+                        <input type="text" placeholder='Digite o codigo da sala' name="" id="" />
 
                         <ButtonCounter type='submit'>
                             Entrar na sala
