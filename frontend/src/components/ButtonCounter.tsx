@@ -14,7 +14,7 @@ export function ButtonCounter(props: ButtonProps){
 
 
     return(
-        <button className="button" {...props} />
+        <button className="button"  {...props} />
 
     )
 }

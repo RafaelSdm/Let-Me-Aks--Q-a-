@@ -3,9 +3,9 @@ import logoImg from '../assets/images/logo.svg'
 import googleImg from '../assets/images/google-icon.svg'
 
 
-import {useContext} from 'react'
+import {FormEvent, useState} from 'react'
 
-import {auth, firebase} from '../services/firebase'
+import {auth, database, firebase} from '../services/firebase'
 
 import {useNavigate} from 'react-router-dom'
 
@@ -24,6 +24,8 @@ export function Home(){
     const navigate = useNavigate();
 
     const {user, signInWithGoogle} = useAuth()
+
+    const[roomCode, setRoomCode] = useState('')
 
 
    
@@ -44,6 +46,41 @@ export function Home(){
 
         
     }
+
+
+
+    async function handleJoinRoom(event: FormEvent ){
+
+        event.preventDefault()
+
+
+        if(roomCode.trim() === ''){
+            return;
+
+
+
+        }else{
+            const roomRef = await database.ref(`rooms/${roomCode}`).get()
+
+
+
+            if(!roomRef.exists()){
+                window.alert("Seu animal essa sala na existe escreve direito nessa porra tomar no cu nao que nao ne vai se fuder burro pra caralho")
+
+                return;
+            }else{
+                navigate(`rooms/${roomCode}`)
+            }
+
+
+        }
+
+
+
+    }
+
+
+
 
     return(
         <div id='page-auth'>
@@ -67,8 +104,8 @@ export function Home(){
                     </button>
                     <div className='separator'>Ou entre em uma sala</div>
 
-                    <form action="">
-                        <input type="text" placeholder='Digite o codigo da sala' name="" id="" />
+                    <form onSubmit={handleJoinRoom} >
+                        <input type="text" placeholder='Digite o codigo da sala' onChange={event => setRoomCode(event.target.value) } value={roomCode} name="" id="" />
 
                         <ButtonCounter type='submit'>
                             Entrar na sala

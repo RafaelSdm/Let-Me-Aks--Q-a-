@@ -5,15 +5,19 @@ import logoImg from '../assets/images/logo.svg'
 import googleImg from '../assets/images/google-icon.svg'
 
 
-import {useContext} from 'react'
+import {useState, FormEvent} from 'react'
 
 import {ButtonCounter} from '../components/ButtonCounter'
 
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+
 
 import '../styles/auth.scss'
 import { AuthContext } from '../contexts/AuthContext'
 import { useAuth } from '../hooks/useAuth'
+import { database } from '../services/firebase'
+
+
 
 
 
@@ -23,6 +27,43 @@ import { useAuth } from '../hooks/useAuth'
 export function NewRoom(){
 
     const {user} = useAuth()
+
+    const navigate = useNavigate()
+
+
+    const[newRoom, setNewRoom] =useState('')
+
+    async function handleCreateRoom(event: FormEvent) {
+
+        event.preventDefault(); // nao dar f5 na pagina
+
+
+        console.log(newRoom)
+
+        if(newRoom.trim() === ''){
+            return;
+
+        }else{
+
+
+            const roomRef = database.ref('rooms');
+
+            const firebaseRoom = await roomRef.push({
+                title: newRoom,
+                authorId: user?.id,
+
+                
+            })
+
+            navigate(`/rooms/${firebaseRoom.key}`)
+
+
+        }
+        
+
+
+        
+    }
 
 
     return(
@@ -44,8 +85,8 @@ export function NewRoom(){
                     
                    
 
-                    <form action="">
-                        <input type="text" placeholder='Nome da sala' name="" id="" />
+                    <form onSubmit={handleCreateRoom} >
+                        <input type="text" placeholder='Nome da sala' name="" id="" onChange={event => setNewRoom(event.target.value)} value={newRoom} />
 
                         <ButtonCounter type='submit'>
                             Criar sala
