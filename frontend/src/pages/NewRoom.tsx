@@ -12,7 +12,8 @@ import {ButtonCounter} from '../components/ButtonCounter'
 import {Link} from 'react-router-dom'
 
 import '../styles/auth.scss'
-import { AuthContext } from '../App'
+import { AuthContext } from '../contexts/AuthContext'
+import { useAuth } from '../hooks/useAuth'
 
 
 
@@ -21,7 +22,7 @@ import { AuthContext } from '../App'
 
 export function NewRoom(){
 
-    const {user} = useContext(AuthContext)
+    const {user} = useAuth()
 
 
     return(
@@ -39,8 +40,8 @@ export function NewRoom(){
                 <div className='main-content'>
                     <img src={logoImg} alt="imagem de logo letmeask" />
                    
-                    <h2>Criar uma nova sala</h2>
-                    <h2>{user?.name }</h2>
+                    <h2>Criar uma nova sala  </h2>
+                    
                    
 
                     <form action="">

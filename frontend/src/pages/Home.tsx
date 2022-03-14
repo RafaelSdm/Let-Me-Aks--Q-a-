@@ -14,7 +14,8 @@ import {ButtonCounter} from '../components/ButtonCounter'
 import '../styles/auth.scss'
 
 
-import {AuthContext} from '../App'
+import {AuthContext} from '../contexts/AuthContext'
+import { useAuth } from '../hooks/useAuth'
 
 
 export function Home(){
@@ -22,7 +23,7 @@ export function Home(){
 
     const navigate = useNavigate();
 
-    const {user, signInWithGoogle} = useContext(AuthContext)
+    const {user, signInWithGoogle} = useAuth()
 
 
    
