@@ -18,6 +18,7 @@ type RoomParams = {
 export function  Room() {
 
     const {user} = useAuth()
+  
     const params = useParams<RoomParams>()
     const roomId = params.id;
 
@@ -50,9 +51,11 @@ export function  Room() {
         };
 
 
-        await database.ref(`rooms/${roomId}/questions`).push(question)
+        await database.ref(`rooms/${roomId}/questions`).push(question);
 
-    }
+        setNewQuestion('');
+
+    }   
 
 
 
@@ -81,7 +84,14 @@ export function  Room() {
 
                     <div className='form-footer'>
 
-                        <span>Para enviar uma pergunta, <button>Faca seu login</button></span>
+                        {user ?(
+                            <div className='user-info'>
+                                <img src={user.avatar} alt="" />
+                                <span>{user.name}</span>
+                            </div>
+                        ) : (
+                            <span>Para fazer uma pergunta, <button>faça seu login</button></span>
+                        ) }
                         <ButtonCounter disabled={!user} type='submit'>Enviar Pergunta</ButtonCounter>
 
                     </div>
