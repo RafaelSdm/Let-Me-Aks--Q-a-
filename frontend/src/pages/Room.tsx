@@ -11,6 +11,7 @@ import { useAuth } from '../hooks/useAuth'
 import { database } from '../services/firebase'
 import { type } from '@testing-library/user-event/dist/type'
 import {Question} from '../components/Question'
+import {useRoom} from '../hooks/useRoom'
 
 
 
@@ -25,29 +26,8 @@ type RoomParams = {
 
 
 
-type FirebaseQuestions = Record<string, {
-    author:{
-        name: string;
-        avatar: string;
-    };
 
-    content: string;
-    isAnswered: boolean;
-    isHighLighted: boolean;
-}>
 
-type QuestionType = {
-    id: string;
-    author: {
-        name: string;
-        avatar: string;
-    };
-
-    content: string;
-    isAnswered: boolean;
-    isHighLighted: boolean;
-
-}
 
 
 
@@ -61,45 +41,12 @@ export function  Room() {
     const roomId = params.id;
 
     const [newQuestion, setNewQuestion] = useState('')
+    
 
-    const[questions, setQuestions] = useState<QuestionType[]>([])
-    const[title, setTitle] = useState('')
+    const {title, questions} = useRoom(roomId as string)
+    
 
-    useEffect(() => {
-        const roomRef = database.ref(`rooms/${roomId}`)
-
-       
-
-        roomRef.on('value', room => {
-           // console.log(room.val())
-            const databaseRoom = room.val();
-            const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
-
-            const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
-
-                return{
-                    id: key,
-                    content: value.content,
-                    author: value.author,   
-                    isAnswered: value.isAnswered,
-                    isHighLighted: value.isHighLighted
-                    
-
-                }
-
-                
-
-
-            })
-
-            //console.log(parsedQuestions)
-            setTitle(databaseRoom.title)
-            setQuestions(parsedQuestions)
-            
-        })
-
-        
-    }, [roomId])
+  
 
 
 
@@ -200,5 +147,8 @@ export function  Room() {
 
         </div>
     )
+
+
+    
     
 }
