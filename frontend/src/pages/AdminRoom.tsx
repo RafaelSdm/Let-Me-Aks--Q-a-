@@ -103,11 +103,7 @@ export function  AdminRoom() {
                     {questions.length > 0 && <span>{questions.length} perguntas </span>}
                 </div>
 
-                <form onSubmit={handleSendQuestion} >
-                    <textarea placeholder='O que voce quer perguntar?' onChange={event => setNewQuestion(event.target.value) } value={newQuestion} />
-
-                    
-                </form>
+               
 
 
 
