@@ -10,6 +10,7 @@ import { FormEvent, useState, useEffect } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import { database } from '../services/firebase'
 import { type } from '@testing-library/user-event/dist/type'
+import {Question} from '../components/Question'
 
 
 
@@ -35,7 +36,7 @@ type FirebaseQuestions = Record<string, {
     isHighLighted: boolean;
 }>
 
-type Question = {
+type QuestionType = {
     id: string;
     author: {
         name: string;
@@ -61,7 +62,7 @@ export function  Room() {
 
     const [newQuestion, setNewQuestion] = useState('')
 
-    const[questions, setQuestions] = useState<Question[]>([])
+    const[questions, setQuestions] = useState<QuestionType[]>([])
     const[title, setTitle] = useState('')
 
     useEffect(() => {
@@ -176,7 +177,22 @@ export function  Room() {
                 </form>
 
 
-                {JSON.stringify(questions)}
+
+                <div className='question-list'>
+
+                    {questions.map(question =>{
+                        return(
+                            <Question
+                             key={question.id}
+                             content={question.content} 
+                             author={question.author}/>
+                        )
+                    })}
+
+                </div>
+
+
+               
 
 
 

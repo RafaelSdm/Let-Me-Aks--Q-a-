@@ -85,7 +85,7 @@
                }
 
 
-               span{
+               > span{
                    font-size: 14px;
                    color: #737388;
                    font-weight: 500;
@@ -102,6 +102,12 @@
                    }
                }
             }
+       }
+
+
+
+       .question-list{
+           margin-top: 32px;
        }
     }
 
