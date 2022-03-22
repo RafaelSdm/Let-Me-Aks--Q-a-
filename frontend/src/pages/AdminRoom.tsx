@@ -1,12 +1,12 @@
 import logoImg from '../assets/images/logo.svg'
 
 
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 
 import '../styles/room.scss'
 
 import {RoomCode} from '../components/RoomCode'
-import { FormEvent, useState, useEffect } from 'react'
+import { FormEvent, useState, useEffect} from 'react'
 import { useAuth } from '../hooks/useAuth'
 import { database } from '../services/firebase'
 import { type } from '@testing-library/user-event/dist/type'
@@ -30,6 +30,8 @@ type RoomParams = {
 export function  AdminRoom() {
 
     const {user} = useAuth()
+
+    const navigate = useNavigate()
   
     const params = useParams<RoomParams>()
     const roomId = params.id;
@@ -94,6 +96,15 @@ export function  AdminRoom() {
     }
 
 
+    async function handleEndRoom(){
+        await database.ref(`rooms/${roomId}`).update({
+            endedAt: new Date()
+        })
+
+        navigate("/")
+    }
+
+
 
     return(
         <div id="page-room">
@@ -105,7 +116,7 @@ export function  AdminRoom() {
 
                     <div>
                         <RoomCode code={roomId as string}/>
-                        <ButtonCounter isOutlined >Encerrar Sala</ButtonCounter>
+                        <ButtonCounter onClick={handleEndRoom} isOutlined >Encerrar Sala</ButtonCounter>
                     </div>
                     
 

@@ -73,6 +73,12 @@ export function Home(){
             }
 
 
+            if(roomRef.val().endedAt ){
+                window.alert("Sala fechada")
+                return;
+            }
+
+
         }
 
 
