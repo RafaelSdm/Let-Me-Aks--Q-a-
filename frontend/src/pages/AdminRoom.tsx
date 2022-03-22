@@ -13,6 +13,7 @@ import { type } from '@testing-library/user-event/dist/type'
 import {Question} from '../components/Question'
 import {useRoom} from '../hooks/useRoom'
 import { ButtonCounter } from '../components/ButtonCounter'
+import deleteImg from '../assets/images/delete.svg'
 
 
 
@@ -78,6 +79,22 @@ export function  AdminRoom() {
 
 
 
+
+    async function handleDeleteQuestion(questionId: string) {
+
+        if(window.confirm("Tem certeza que deseja excluir esta pergunta?")){
+
+            await database.ref(`rooms/${roomId}/questions/${questionId}`).remove()
+
+        }
+
+        
+
+        
+    }
+
+
+
     return(
         <div id="page-room">
 
@@ -114,7 +131,14 @@ export function  AdminRoom() {
                             <Question
                              key={question.id}
                              content={question.content} 
-                             author={question.author}/>
+                             author={question.author}>
+
+
+                                <button type='button' onClick={() => handleDeleteQuestion(question.id)} >
+                                    <img src={deleteImg} alt="" />
+                                </button>
+
+                             </Question>
                         )
                     })}
 
