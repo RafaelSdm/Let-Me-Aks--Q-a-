@@ -14,6 +14,9 @@ import {Question} from '../components/Question'
 import {useRoom} from '../hooks/useRoom'
 import { ButtonCounter } from '../components/ButtonCounter'
 import deleteImg from '../assets/images/delete.svg'
+import checkImg from '../assets/images/check.svg'
+import answerImg from '../assets/images/answer.svg'
+
 
 
 
@@ -106,6 +109,30 @@ export function  AdminRoom() {
 
 
 
+    async function  handleCheckQuestionAsAnswer(questionId: string) {
+        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+            isAnswered: true,
+        })
+        
+    }
+
+
+    async function handleHightLightQuestion(questionId: string){
+
+        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+            
+            isHighLighted: true,
+        })
+
+
+
+        
+
+
+    }
+
+
+
     return(
         <div id="page-room">
 
@@ -143,6 +170,15 @@ export function  AdminRoom() {
                              key={question.id}
                              content={question.content} 
                              author={question.author}>
+
+
+                                <button type='button' onClick={() =>          handleCheckQuestionAsAnswer(question.id)} >
+                                    <img src={checkImg} alt="" />
+                                </button>
+
+                                <button type='button' onClick={() => handleHightLightQuestion(question.id)} >
+                                    <img src={answerImg} alt="" />
+                                </button>
 
 
                                 <button type='button' onClick={() => handleDeleteQuestion(question.id)} >
